@@ -1,0 +1,12 @@
+{
+  "name": "learn-docker-express",
+  "version": "1.0.0",
+  "description": "Minimal Express app with simulated DB connection",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
