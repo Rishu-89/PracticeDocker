@@ -36,6 +36,62 @@ Runs the Node container with an interactive terminal.
 
 ---
 
+
+### Build Docker Image from Dockerfile
+```bash
+docker build -t myapp .
+```
+Builds a Docker image using the Dockerfile present in the current directory.
+
+- `-t` → Tags/names the image
+- `.` → Current directory
+
+---
+
+### Run Container with Port Mapping
+```bash
+docker run -p 3000:3000 myapp
+```
+Runs the container and maps ports between host and container.
+
+- First `3000` → Host machine port
+- Second `3000` → Container port
+
+Example:
+```bash
+docker run -p 3000:3000 myapp
+```
+
+Application becomes accessible at:
+```bash
+http://localhost:3000
+```
+
+---
+
+### Expose Port in Dockerfile
+```dockerfile
+EXPOSE 3000
+```
+Tells Docker that the container listens on port `3000`.
+
+Example Dockerfile:
+```dockerfile
+FROM node
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
+```
+
+---
+
 ## Key Learnings
 - Images are templates
 - Containers are running instances of images
