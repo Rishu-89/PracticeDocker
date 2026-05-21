@@ -26,6 +26,16 @@ Creates and starts a new container instance using the Node image.
 
 ---
 
+---
+
+### Run Node Container in Interactive Terminal Mode
+```bash
+docker run -it node
+```
+Runs the Node container with an interactive terminal.
+
+---
+
 ## Key Learnings
 - Images are templates
 - Containers are running instances of images
