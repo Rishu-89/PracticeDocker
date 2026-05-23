@@ -587,7 +587,7 @@ tag by default.
 # Automatic Pull Behavior
 
 ```bash
-docker run nginx
+docker run node
 ```
 
 If image does not exist locally:
