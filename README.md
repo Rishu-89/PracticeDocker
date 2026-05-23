@@ -457,3 +457,139 @@ Behavior:
 - Container gets deleted automatically after stopping
 - Useful for temporary/testing containers
 - Not commonly used for long-running servers
+
+# Docker Hub & Image Management Notes
+
+## Copy Files Between Container and Host
+```bash
+docker cp container_name:/test/. dummy
+```
+
+Copies files from running container to local machine.
+
+Useful for:
+- Logs
+- Generated files
+- Debugging
+
+---
+
+# Name a Container
+```bash
+docker run --name myapp image_id
+```
+
+Assigns custom name to container.
+
+---
+
+# Build Image with Name and Tag
+```bash
+docker build -t goals:version12 .
+```
+
+Format:
+```txt
+name:tag
+```
+
+- Name → Image name
+- Tag → Version/unique identifier
+
+---
+
+# Run Named Image
+```bash
+docker run goals:version12
+```
+
+Runs image using name and tag.
+
+---
+
+# Sharing Images
+
+Usually only images are shared:
+- Docker Hub
+- AWS ECR
+- Google Artifact Registry
+- Other container registries
+
+Containers themselves are not shared.
+
+---
+
+# Push Image to Docker Hub
+```bash
+docker push rishu89656/node-hello-world
+```
+
+Pushes image to Docker Hub repository.
+
+---
+
+# Local Image Name Must Match Docker Hub Repository
+```bash
+docker build -t rishu89656/node-hello-world .
+```
+
+Builds image with Docker Hub repository name.
+
+---
+
+# Build with Tag
+```bash
+docker build -t rishu89656/node-hello-world:v1 .
+```
+
+Creates tagged image.
+
+---
+
+# Tag Existing Image
+```bash
+docker tag old_name:tag new_name:tag
+```
+
+Creates another reference/tag for same image.
+
+---
+
+# Login to Docker Hub
+```bash
+docker login
+```
+
+Authenticates Docker client with Docker Hub.
+
+---
+
+# Pull Image from Docker Hub
+```bash
+docker pull rishu89656/node-hello-world:v1
+```
+
+Downloads image from Docker Hub.
+
+If tag is omitted:
+```bash
+docker pull rishu89656/node-hello-world
+```
+
+Docker pulls:
+```txt
+latest
+```
+tag by default.
+
+---
+
+# Automatic Pull Behavior
+
+```bash
+docker run nginx
+```
+
+If image does not exist locally:
+- Docker automatically pulls image from Docker Hub
+- Then starts container
