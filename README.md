@@ -339,3 +339,121 @@ docker start container_id
 
 - Starts EXISTING stopped container
 - Does NOT create new container
+
+
+# Docker Additional Notes
+
+## View Images
+```bash
+docker images
+```
+
+Shows all locally available Docker images.
+
+---
+
+## Inspect Image
+```bash
+docker image inspect image_id
+```
+
+Shows detailed information about image:
+- OS
+- Architecture
+- Layers
+- Environment variables
+- Metadata
+
+---
+
+# Interactive Mode
+
+## Run Container Interactively
+```bash
+docker run -it image_name
+```
+
+Flags:
+- `-i` → Interactive input
+- `-t` → Terminal
+
+Example:
+```bash
+docker run -it ubuntu
+```
+
+---
+
+# Restart Container with Terminal Attached
+```bash
+docker start -a -i container_name
+```
+
+Flags:
+- `-a` → Attach terminal/logs
+- `-i` → Interactive mode
+
+---
+
+# Execute Command Inside Running Container
+```bash
+docker exec -it container_name bash
+```
+
+Runs bash shell inside running container.
+
+---
+
+# Remove Containers
+
+## Remove Single Container
+```bash
+docker rm container_name
+```
+
+## Remove Multiple Containers
+```bash
+docker rm name_1 name_2 name_3
+```
+
+Important:
+- Cannot remove running container
+- Stop container first
+
+Example:
+```bash
+docker stop mycontainer
+docker rm mycontainer
+```
+
+---
+
+# Remove Images
+```bash
+docker rmi image_id
+```
+
+Important:
+- Containers using image must be removed first
+- Even stopped containers block image deletion
+
+---
+
+# Remove Unused Images
+```bash
+docker image prune
+```
+
+Removes unused/dangling images.
+
+---
+
+# Automatically Remove Container After Stop
+```bash
+docker run --rm image_id
+```
+
+Behavior:
+- Container gets deleted automatically after stopping
+- Useful for temporary/testing containers
+- Not commonly used for long-running servers
