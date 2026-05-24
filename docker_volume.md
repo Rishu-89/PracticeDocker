@@ -109,3 +109,85 @@ They remain until removed manually or removed with container using --rm.
 VOLUME ["/app/feedback"]
 -Creates an anonymous volume stored in Docker-managed storage.
 -It is not "unfindable", just harder to manage due to random naming.
+
+
+
+
+
+
+# Docker Bind Mounts, Named Volumes & Anonymous Volumes
+
+## Bind Mount
+
+```bash
+-v "/home/rishu/data-volumes-01-starting-setup:/app"
+```
+
+Connects local folder with container folder.
+
+| Local Machine | Container |
+|---|---|
+| /home/rishu/data-volumes-01-starting-setup | /app |
+
+Used in development so local code changes instantly reflect inside container without rebuilding image.
+
+---
+
+## Named Volume
+
+```bash
+-v feedback:/app/feedback
+```
+
+Stores persistent data managed by Docker.
+
+| Volume Name | Container Path |
+|---|---|
+| feedback | /app/feedback |
+
+Data remains even if container is deleted.
+
+---
+
+## Anonymous Volume
+
+```bash
+-v /app/node_modules
+```
+
+or
+
+```dockerfile
+VOLUME ["/app/node_modules"]
+```
+
+Creates anonymous volume for `node_modules`.
+
+Used because bind mount can overwrite container `node_modules`.
+
+This keeps container dependencies safe and Linux-compatible.
+
+---
+
+## Example Using All Types of Volumes
+
+```bash
+docker run -d \
+-p 3000:80 \
+--name feedback-app \
+-v feedback:/app/feedback \
+-v "/home/rishu/data-volumes-01-starting-setup:/app" \
+-v /app/node_modules \
+feddback-node
+```
+
+---
+
+## Explanation
+
+| Volume Type | Purpose |
+|---|---|
+| Named Volume | Persistent feedback data |
+| Bind Mount | Sync local project files with container |
+| Anonymous Volume | Protect container `node_modules` |
+
