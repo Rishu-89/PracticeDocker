@@ -104,3 +104,8 @@ Removes all unused Docker volumes.
 - Anonymous volumes are auto-created by Docker.
 - Named volumes are better for persistent application data.
 - Bind mounts are mainly used during development.
+- Anonymous volumes are not deleted when container stops.
+They remain until removed manually or removed with container using --rm.
+VOLUME ["/app/feedback"]
+-Creates an anonymous volume stored in Docker-managed storage.
+-It is not "unfindable", just harder to manage due to random naming.
