@@ -1,0 +1,52 @@
+version:"3.8"
+services:
+    mongodb:                    # use this services name for conection (in place of local host) 
+        image: mongo:4.4
+        volumes:
+            - data:/data/db      #named volume
+        container_name: mongodb     # optional 
+        # environment:
+        #     - MONGO_INITDB_ROOT_USERNAME=max
+        #     MONGO_INITDB_ROOT_USERNAME: max
+        #     - MONGO_INITDB_ROOT_PASSWORD=secret
+        env_file:
+            - ./env/mongo.env        # env file 
+        networks:                    # optional
+            - goals-net
+    backend:                        
+        build: ./backend
+        # build:
+        #     context: ./backend
+        #     dockerfile: Dockerfile
+        #     args:
+        #        some-arg:1
+        ports:
+            - '3000:80'
+        volumes:
+            - logs:/app/logs        #named volume
+            - ./backend:/app        #bind voiume
+            - /app/node_modules     #ananomous volumes
+        env_file:
+            - ./env/backend.env     # env file
+        depends_on:
+            - mongodb               # first open mongodb services then backend
+        networks:                   # optional
+            - goals-net
+    frontend:
+        build: ./frontend
+        ports:
+            - '3001:3000'
+        volumes:
+            - ./frontend/src:/app/src   # bind voulmes
+        stdin_open : true   # for open in intractive mode(intractive)
+        tty: true           # for open in intractive mode(terminal mode) it
+        depends_on:
+            - backend
+        networks:                    # optional
+            - goals-net
+
+volumes:
+    data:
+    logs:
+networks:           # optional
+    goals-net:
