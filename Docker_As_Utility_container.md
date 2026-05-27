@@ -226,48 +226,6 @@ docker-compose run --rm npm install express
 
 ---
 
-# Common Commands
-
-## Start Node Container
-
-```bash
-docker run -it -d node
-```
-
----
-
-## Execute Command Inside Running Container
-
-```bash
-docker exec -it container_name npm init
-```
-
----
-
-## Override CMD
-
-```bash
-docker run -it node npm init
-```
-
----
-
-## Bind Mount
-
-```bash
--v $(pwd):/app
-```
-
----
-
-## Docker Compose Run
-
-```bash
-docker-compose run --rm npm init
-```
-
----
-
 # Advantages of Utility Containers
 
 - No local Node.js installation required
@@ -278,13 +236,3 @@ docker-compose run --rm npm init
 
 ---
 
-# Recommended Structure
-
-```text
-project/
-│
-├── Dockerfile
-├── docker-compose.yml
-├── package.json
-└── src/
-```
